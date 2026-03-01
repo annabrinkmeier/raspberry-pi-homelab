@@ -198,8 +198,8 @@ Applied consistently across all Pis:
 | Pi 1: WiFi connected | ✅ | March 2026 |
 | Pi 1: Default password changed | ✅ | March 2026 |
 | Pi 1: SSH enabled & connected | ✅ | March 2026 |
-| Pi 1: System updates run | 🔄 | |
-| Pi 1: SSH hardening applied | Pending | |
+| Pi 1: System updates run | ✅ | March 2026 |
+| Pi 1: SSH hardening applied | ✅ | March 2026 |
 | Pi 2: Pi-hole installed & network DNS set | ⬜ | |
 | Pi 2: Blocklists configured | ⬜ | |
 | Pi 2: WireGuard server configured | ⬜ | |
