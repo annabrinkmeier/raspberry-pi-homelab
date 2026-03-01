@@ -75,6 +75,14 @@ Configure a dedicated retro gaming console using RetroPie — a beginner-friendl
 - Changed default `pi` password and disabled default user
 - Enabled key-based SSH authentication, disabled password login
 - Understood attack surface reduction (disabled unused services)
+- How to flash an OS image using Raspberry Pi Imager
+- How to SSH into a Linux device from a Mac
+- How to generate SSH keypairs and use key-based authentication
+- How to disable password authentication for SSH hardening
+- How to configure UFW firewall rules
+- How Debian package repositories work and how to fix broken ones
+- Troubleshooting is a core IT skill — sometimes a fresh install 
+  is the right decision
 
 ---
 
@@ -200,6 +208,9 @@ Applied consistently across all Pis:
 | Pi 1: SSH enabled & connected | ✅ | March 2026 |
 | Pi 1: System updates run | ✅ | March 2026 |
 | Pi 1: SSH hardening applied | ✅ | March 2026 |
+| Pi 1: Reflashed with fresh RetroPie image | ✅ | March 2026 |
+| Pi 1: UFW firewall installed | ✅ | March 2026 |
+| Pi 1: SSH enabled | ✅ | March 2026 |
 | Pi 2: Pi-hole installed & network DNS set | ⬜ | |
 | Pi 2: Blocklists configured | ⬜ | |
 | Pi 2: WireGuard server configured | ⬜ | |
