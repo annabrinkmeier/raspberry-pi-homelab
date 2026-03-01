@@ -193,10 +193,14 @@ Applied consistently across all Pis:
 
 | Milestone | Status | Date Completed |
 |-----------|--------|----------------|
-| Pi 1: OS installed & SSH configured | ✅ | |
-| Pi 1: RetroPie running | ✅ | |
-| Pi 1: SSH hardening applied | ✅ | |
-| Pi 2: Pi-hole installed & network DNS set | 🔄 | |
+| Pi 1: OS installed & SSH configured | ✅ | March 2026 |
+| Pi 1: RetroPie running | ✅ | March 2026 |
+| Pi 1: WiFi connected | ✅ | March 2026 |
+| Pi 1: Default password changed | ✅ | March 2026 |
+| Pi 1: SSH enabled & connected | ✅ | March 2026 |
+| Pi 1: System updates run | 🔄 | |
+| Pi 1: SSH hardening applied | Pending | |
+| Pi 2: Pi-hole installed & network DNS set | ⬜ | |
 | Pi 2: Blocklists configured | ⬜ | |
 | Pi 2: WireGuard server configured | ⬜ | |
 | Pi 2: Mobile VPN client connected | ⬜ | |
