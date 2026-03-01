@@ -84,6 +84,13 @@ Configure a dedicated retro gaming console using RetroPie — a beginner-friendl
 - Troubleshooting is a core IT skill — sometimes a fresh install 
   is the right decision
 
+**Known Issue:** 
+RetroPie 4.8 is built on Debian Buster which has 
+package conflicts preventing full system upgrades. Unattended-upgrades 
+could not be installed due to held packages (libgcc-8-dev conflict). 
+Manual updates via `sudo apt update && sudo apt upgrade` work for 
+individual packages. A future improvement would be migrating to a 
+Bookworm-based image when RetroPie releases one.
 ---
 
 ## Pi 2 — Pi-hole + WireGuard VPN
