@@ -218,7 +218,8 @@ Applied consistently across all Pis:
 | Pi 1: Reflashed with fresh RetroPie image | ✅ | March 2026 |
 | Pi 1: UFW firewall configured | ✅ | March 2026 |
 | Pi 1: SSH  enabled |  | |
-| Pi 2: Pi-hole installed & network DNS set | ⬜ | |
+| Pi 2: OS installed & SSH configured | ✅ | March 2026 |
+| Pi 2: Pi-hole installed & network DNS set |  | |
 | Pi 2: Blocklists configured | ⬜ | |
 | Pi 2: WireGuard server configured | ⬜ | |
 | Pi 2: Mobile VPN client connected | ⬜ | |
