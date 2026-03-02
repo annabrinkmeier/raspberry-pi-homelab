@@ -126,7 +126,37 @@ Transform a Raspberry Pi into a network-wide ad blocker and personal VPN server 
 - Principle of least privilege in firewall rules
 - Traffic analysis via Pi-hole query logs
 - VPN tunneling and encrypted data in transit
+### What I Learned on Pi 2
 
+**Pi-hole & DNS:**
+- How DNS works at a network level and how it can be used 
+  for security (blocking malicious domains before they load)
+- Configured a DNS sinkhole blocking 77,526 ad and malware domains
+- Learned about DNS single points of failure — added 1.1.1.1 
+  as a fallback DNS to prevent internet outages
+- Discovered Pi-hole v6 changed the web interface significantly
+  — had to troubleshoot using curl and systemctl to diagnose
+
+**WireGuard VPN:**
+- How VPN tunneling works at a cryptographic level using 
+  Curve25519 asymmetric key pairs
+- Generated server and client keypairs manually
+- Configured wg0.conf interface and peer definitions from scratch
+- Understood the difference between local and external VPN testing
+- Learned that port forwarding is required for external VPN access
+
+**Security & Networking:**
+- Configured UFW firewall rules for SSH, WireGuard, and web ports
+- Enabled IP forwarding for VPN traffic routing
+- Learned how self-signed SSL certificates work and why browsers 
+  block them
+- Troubleshot network connectivity using ping, curl, ss, and systemctl
+- Understood NAT (Network Address Translation) and port forwarding
+
+**Real World Lesson:**
+- Troubleshooting is 90% of IT work — this Pi required diagnosing 
+  multiple issues including missing packages, firewall blocks, 
+  and a major version change in Pi-hole
 ---
 
 ## Pi 3 — Jellyfin + Nextcloud
@@ -225,9 +255,12 @@ Applied consistently across all Pis:
 | Pi 2: Pi-hole installed & network DNS set | ✅ | March 2026 |
 | Pi 2: Blocklists configured | ✅ | March 2026 |
 | Pi 2: Set as DNS on Mac and iPhone | ✅ | March 2026 |
+| Pi 2: UFW firewall configured | ✅ | March 2026 |
+| Pi 2: Web dashboard accessible | ✅ | March 2026 |
 | Pi 2: WireGuard server configured | ✅ | March 2026 |
 | Pi 2: WireGuard client configured | ✅ | March 2026 |
 | Pi 2: Mobile VPN client connected | ⬜ | |
+| Pi 2: Port forwarding configured (i3 call) | ⬜ | |
 | Pi 3: Docker installed | ⬜ | |
 | Pi 3: Jellyfin running in Docker | ⬜ | |
 | Pi 3: Nextcloud running with HTTPS | ⬜ | |
