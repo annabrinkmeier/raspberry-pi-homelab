@@ -219,8 +219,9 @@ Applied consistently across all Pis:
 | Pi 1: UFW firewall configured | ✅ | March 2026 |
 | Pi 1: SSH  enabled |  | |
 | Pi 2: OS installed & SSH configured | ✅ | March 2026 |
-| Pi 2: Pi-hole installed & network DNS set |  | |
-| Pi 2: Blocklists configured | ⬜ | |
+| Pi 2: Pi-hole installed & network DNS set | ✅ | March 2026 |
+| Pi 2: Blocklists configured | ✅ | March 2026 |
+| Pi 2: Set as DNS on Mac and iPhone | ✅ | March 2026 |
 | Pi 2: WireGuard server configured | ⬜ | |
 | Pi 2: Mobile VPN client connected | ⬜ | |
 | Pi 3: Docker installed | ⬜ | |
