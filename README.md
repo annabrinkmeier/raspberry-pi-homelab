@@ -83,6 +83,9 @@ Configure a dedicated retro gaming console using RetroPie — a beginner-friendl
 - How Debian package repositories work and how to fix broken ones
 - Troubleshooting is a core IT skill — sometimes a fresh install 
   is the right decision
+- Learned about DNS single points of failure firsthand
+— configured a fallback DNS server (1.1.1.1) to prevent 
+internet outages if Pi-hole becomes unavailable.
 
 **Known Issue:** 
 RetroPie 4.8 is built on Debian Buster which has 
