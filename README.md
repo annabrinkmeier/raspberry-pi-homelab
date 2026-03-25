@@ -158,82 +158,41 @@ Transform a Raspberry Pi into a network-wide ad blocker and personal VPN server 
   multiple issues including missing packages, firewall blocks, 
   and a major version change in Pi-hole
 ---
-
-## Pi 3 — Jellyfin + Nextcloud
-
+## Pi 3 — Pi Movie Vault (Jellyfin + Nextcloud)
 ### Purpose
-Host a personal media server and self-hosted cloud storage solution using Docker — covering containerization, reverse proxying, SSL certificates, and storage management.
+Host a personal media server and self-hosted cloud storage solution 
+using Docker — covering containerization, reverse proxying, SSL 
+certificates, and storage management.
 
-### Jellyfin Media Server
-- Installed via Docker Compose
-- Configured media library with correct volume mounts
-- Set up hardware transcoding (if supported)
-- Accessible on local network at `http://192.168.1.103:8096`
+### Current Status: In Progress 🔄
 
-### Nextcloud (Self-hosted Cloud)
-- Deployed via Docker Compose with MariaDB backend
-- Configured HTTPS using Let's Encrypt (Certbot) or self-signed cert
+### What I've Done So Far
+- Flashed Raspberry Pi OS Lite (64-bit) using Raspberry Pi Imager
+- Pre-configured hostname (pimovievault), username, SSH keys, 
+  and WiFi credentials during flash using Imager customisation settings
+- Attempted remote setup from hotel during work trip
+- Discovered hotel WiFi uses **client isolation** — a security feature 
+  that prevents devices on the same network from communicating.
+  Confirmed by running a full network sweep (arp -a and ping sweep)
+  with no Pi hostname appearing in results.
+- SD card is flashed and ready for home network deployment
+
+### Planned Setup
+**Jellyfin Media Server**
+- Install via Docker Compose
+- Configure media library with correct volume mounts
+- Set up hardware transcoding
+- Accessible on local network at `http://192.168.40.xxx:8096`
+
+**Nextcloud (Self-hosted Cloud)**
+- Deploy via Docker Compose with MariaDB backend
+- Configure HTTPS using self-signed certificate
 - Set up Nginx reverse proxy for clean domain routing
-- Configured file storage quotas and user accounts
-- Enabled automatic backups via cron job
+- Configure file storage and user accounts
+- Enable automatic backups via cron job
 
-### Skills Practiced
+### Planned Skills to Practice
 `Docker & Docker Compose` · `Reverse Proxy (Nginx)` · `SSL/TLS Certificates` · `Database Administration (MariaDB)` · `Cron Jobs` · `Self-hosting` · `Storage Management`
-
-### Cybersecurity Concepts Learned
-- TLS encryption and certificate management
-- Container isolation and security
-- Authentication hardening (2FA in Nextcloud)
-- Data sovereignty vs. cloud provider trust
-- Backup strategies and data integrity
-
----
-
-## Skills Demonstrated
-
-| Domain | Skills |
-|--------|--------|
-| **Linux** | CLI navigation, file permissions, systemd services, cron, shell scripting |
-| **Networking** | DNS, DHCP, static IPs, port forwarding, subnetting, firewall rules |
-| **Security** | SSH hardening, VPN, firewall configuration, principle of least privilege |
-| **Protocols** | DNS, HTTP/HTTPS, WireGuard, SSH, SFTP |
-| **Containerization** | Docker, Docker Compose, volume mounts, networking |
-| **Self-hosting** | Reverse proxies, SSL certs, domain routing, service management |
-| **Documentation** | Architecture diagrams, setup guides, README writing |
-
----
-
-## Security Practices
-
-Applied consistently across all Pis:
-
-- [ ] Changed default credentials on first boot
-- [ ] Disabled default `pi` user account
-- [ ] Enabled SSH key-based authentication
-- [ ] Disabled SSH password authentication
-- [ ] Configured UFW firewall (deny by default, allow specific ports)
-- [ ] Enabled automatic security updates (`unattended-upgrades`)
-- [ ] Assigned static IPs / DHCP reservations
-- [ ] Enabled fail2ban on SSH-exposed services
-- [ ] Regular system updates (`apt update && apt upgrade`)
-- [ ] Documented all open ports and services
-
----
-
-## What I Learned
-
-### Technical
-- How DNS actually works — and how it can be weaponized or protected
-- The difference between encryption in transit vs. at rest
-- How containers isolate services and why that matters for security
-- Real firewall configuration vs. theoretical knowledge
-- How VPNs work at a cryptographic level (not just "it hides my IP")
-
-### Professional
-- How to document infrastructure in a way others can follow
-- Troubleshooting methodology: logs → isolation → testing → fix
-- Reading man pages, GitHub issues, and community forums effectively
-- Why security is a process, not a product
 
 ---
 
