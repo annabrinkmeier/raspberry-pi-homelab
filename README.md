@@ -26,7 +26,7 @@
 
 ## Overview
 
-This project documents my hands-on home lab built with three Raspberry Pi single-board computers. Each Pi is configured to serve a distinct purpose, collectively covering a wide range of IT and cybersecurity disciplines — from network administration and DNS management to VPN configuration, containerization, and self-hosted cloud services.
+This project documents my hands-on home lab built with three Raspberry Pi single-board computers. Each Pi is configured to serve a distinct purpose, collectively covering a wide range of IT and cybersecurity disciplines. From network administration and DNS management to VPN configuration, containerization, and self-hosted cloud services.
 
 **Why I built this:** Real skills come from breaking things, fixing them, and understanding why they broke. This lab is my sandbox for doing exactly that.
 
