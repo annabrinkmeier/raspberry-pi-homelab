@@ -205,26 +205,28 @@ certificates, and storage management.
 | Pi 1: WiFi connected | ✅ | March 2026 |
 | Pi 1: Default password changed | ✅ | March 2026 |
 | Pi 1: SSH enabled & connected | ✅ | March 2026 |
-| Pi 1: System updates run |  |  |
 | Pi 1: SSH hardening applied | ✅ | March 2026 |
 | Pi 1: Reflashed with fresh RetroPie image | ✅ | March 2026 |
 | Pi 1: UFW firewall configured | ✅ | March 2026 |
-| Pi 1: SSH  enabled |  | |
+| Pi 1: System updates run | ⬜ | |
 | Pi 2: OS installed & SSH configured | ✅ | March 2026 |
 | Pi 2: Pi-hole installed & network DNS set | ✅ | March 2026 |
-| Pi 2: Blocklists configured | ✅ | March 2026 |
+| Pi 2: Blocklists configured (77,526 domains) | ✅ | March 2026 |
 | Pi 2: Set as DNS on Mac and iPhone | ✅ | March 2026 |
 | Pi 2: UFW firewall configured | ✅ | March 2026 |
 | Pi 2: Web dashboard accessible | ✅ | March 2026 |
 | Pi 2: WireGuard server configured | ✅ | March 2026 |
 | Pi 2: WireGuard client configured | ✅ | March 2026 |
-| Pi 2: Mobile VPN client connected | ⬜ | |
-| Pi 2: Port forwarding configured (i3 call) | ⬜ | |
-| Pi 3: Docker installed | ⬜ | |
-| Pi 3: Jellyfin running in Docker | ⬜ | |
+| Pi 2: Port forwarding configured (i3 call) | ✅ | April 2026 |
+| Pi 2: Mobile VPN client connected | ✅ | April 2026 |
+| Pi 3: OS installed & SSH configured | ✅ | April 2026 |
+| Pi 3: Docker installed | ✅ | April 2026 |
+| Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
+| Pi 3: Media SSD mounted (3.6TB) | ✅ | April 2026 |
+| Pi 3: Jellyfin accessible on Apple TV | ✅ | April 2026 |
+| Pi 3: SSD auto-mount configured | ✅ | April 2026 |
 | Pi 3: Nextcloud running with HTTPS | ⬜ | |
 | Pi 3: Automatic backups configured | ⬜ | |
-| All: UFW firewall configured | ⬜ | |
 | All: fail2ban installed | ⬜ | |
 | Documentation complete | 🔄 | |
 
