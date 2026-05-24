@@ -220,9 +220,9 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 ✅ Complete · 🔄 In Progress · ⬜ Not Started
 
 ---
-
 ## Future Plans
 
+### Immediate Next Steps
 - [ ] Complete Wazuh SIEM deployment on Pi 4
 - [ ] Install Fail2ban on Pi 3 and Pi 4
 - [ ] Deploy Nextcloud on Pi 3
@@ -232,6 +232,29 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 - [ ] Experiment with Kubernetes (k3s)
 - [ ] Add DMZ network segment
 
+### Security+ Lab Roadmap
+Structured additions aligned with Security+ exam domains:
+
+**Current ✅**
+- Pi-hole DNS sinkhole (Domain 2 — Threat Intelligence)
+- WireGuard VPN (Domain 3 — Network Security)
+- Jellyfin in Docker (Domain 3 — Containerization)
+- UFW Firewall (Domain 3 — Firewall Rules)
+- SSH Hardening + Key-based Auth (Domain 1 — Authentication)
+- Fail2ban IPS (Domain 2 — Intrusion Prevention)
+
+**After Lesson 3 ⬜**
+- Wazuh SIEM on Pi 4 (Domain 4 — Log Analysis)
+- VLANs via Plume (Domain 3 — Network Segmentation)
+
+**After Lesson 4 ⬜**
+- Snort or Suricata IDS (Domain 4 — Intrusion Detection)
+- Integrate IDS alerts into Wazuh SIEM
+
+**After Lesson 5 ⬜**
+- Formal security policy document
+- Incident response procedure
+- Complete network diagram with security controls labeled
 ---
 
 ## About
