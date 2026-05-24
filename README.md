@@ -133,6 +133,11 @@ Transform a Raspberry Pi into a network-wide ad blocker and personal VPN server 
 - Added multiple client devices to Pi-hole DNS manually
 - Understood the difference between dynamic and static IP addresses
   and why static IPs matter for server infrastructure
+- Discovered IP forwarding (net.ipv4.ip_forward) resets to 0 
+  on reboot unless saved to /etc/sysctl.d/ — this was causing 
+  WireGuard routing to break after every reboot
+- Configured WireGuard on-demand activation — automatically 
+  connects on cellular and disconnects on home WiFi
 
 **Pi-hole & DNS:**
 - How DNS works at a network level and how it can be used 
@@ -248,6 +253,8 @@ certificates, and storage management.
 | Pi 2: Pi-hole static IP configured | ✅ | May 2026 |
 | Pi 2: Roku TV added to Pi-hole | ✅ | May 2026 |
 | Pi 2: iPhone added to Pi-hole | ✅ | May 2026 |
+| Pi 2: IP forwarding made permanent | ✅ | May 2026 |
+| Pi 2: WireGuard on-demand cellular configured | ✅ | May 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
