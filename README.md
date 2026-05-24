@@ -157,6 +157,12 @@ Transform a Raspberry Pi into a network-wide ad blocker and personal VPN server 
 - Troubleshooting is 90% of IT work — this Pi required diagnosing 
   multiple issues including missing packages, firewall blocks, 
   and a major version change in Pi-hole
+
+- Diagnosed a months-long VPN routing failure caused by a single 
+  character typo — "erth0" instead of "eth0" in wg0.conf. 
+  This broke iptables NAT masquerading and prevented traffic from 
+  routing out to the internet. Fixed by carefully auditing the 
+  config file character by character.
 ---
 ## Pi 3 — Pi Movie Vault (Jellyfin + Nextcloud)
 ### Purpose
@@ -164,7 +170,7 @@ Host a personal media server and self-hosted cloud storage solution
 using Docker — covering containerization, reverse proxying, SSL 
 certificates, and storage management.
 
-### Current Status: In Progress 🔄
+### Current Status: Jellyfin Complete ✅ | Nextcloud Planned 🔄
 
 ### What I've Done So Far
 - Flashed Raspberry Pi OS Lite (64-bit) using Raspberry Pi Imager
@@ -177,12 +183,24 @@ certificates, and storage management.
   with no Pi hostname appearing in results.
 - SD card is flashed and ready for home network deployment
 
+### Completed Setup
+**Jellyfin Media Server** ✅
+- Installed via Docker on Raspberry Pi OS Lite (64-bit)
+- Connected 3.6TB external SSD for media storage
+- Configured auto-mount via fstab (exFAT format)
+- Media library includes The Sopranos and Yellowstone
+- Accessible on local network at `http://192.168.40.26:8096`
+- Streaming live to Apple TV via Swiftfin app
+- Currently ripping ISO files to MKV format using MakeMKV
+  and renaming with FileBot for proper episode organization
+
 ### Planned Setup
-**Jellyfin Media Server**
-- Install via Docker Compose
-- Configure media library with correct volume mounts
-- Set up hardware transcoding
-- Accessible on local network at `http://192.168.40.xxx:8096`
+**Nextcloud (Self-hosted Cloud)**
+- Deploy via Docker Compose with MariaDB backend
+- Configure HTTPS using self-signed certificate
+- Set up Nginx reverse proxy
+- Configure file storage and user accounts
+- Enable automatic backups via cron job
 
 **Nextcloud (Self-hosted Cloud)**
 - Deploy via Docker Compose with MariaDB backend
@@ -219,6 +237,7 @@ certificates, and storage management.
 | Pi 2: WireGuard client configured | ✅ | March 2026 |
 | Pi 2: Port forwarding configured (i3 call) | ✅ | April 2026 |
 | Pi 2: Mobile VPN client connected | ✅ | April 2026 |
+| Pi 2: VPN routing fixed (eth0 typo) | ✅ | May 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
