@@ -40,7 +40,7 @@ Home Network (192.168.x.x/24)
 │
 ├── Pi 2 — DNS / VPN / Security
 │   ├── Pi-hole (DNS sinkhole, port 53)
-│   ├── WireGuard VPN (UDP 51820)
+│   ├── WireGuard VPN (UDP [custom port])
 │   └── Fail2ban (SSH intrusion prevention)
 │
 ├── Pi 3 — Media Server
@@ -106,7 +106,7 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, an
 
 ### Fail2ban Configuration
 - Installed and configured Fail2ban for SSH intrusion prevention
-- Ban policy: 5 failed attempts within 10 minutes = 1 hour ban
+- Ban policy: configured with custom ban policies
 - Actively monitoring SSH login attempts across all Pis
 
 ### Skills Practiced
@@ -238,7 +238,6 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 
 Built and maintained by Anna Brinkmeier as part of a self-directed IT and cybersecurity learning journey.
 
-📧 annaebrinkmeier@gmail.com
 🔗 [LinkedIn](https://www.linkedin.com/in/anna-brinkmeier-246b34345)
 🐙 [GitHub](https://github.com/annabrinkmeier)
 
