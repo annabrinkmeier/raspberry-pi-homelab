@@ -84,7 +84,9 @@ RetroPie 4.8 is built on Debian Buster which has package conflicts preventing fu
 ## Pi 2 — Pi-hole + WireGuard VPN
 
 ### Purpose
-Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, and intrusion prevention system.
+Transform a Raspberry Pi into a network-wide ad blocker, 
+personal VPN server, intrusion prevention system, and 
+private recursive DNS resolver.
 
 ### Pi-hole Configuration
 - Installed Pi-hole v6 via official installer
@@ -94,6 +96,11 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, an
 - Whitelisted Apple iCloud Private Relay to maintain iPhone functionality
 - Identified and blocked Roku TV surveillance (Alphonso.tv), Amazon Alexa telemetry, Sift Science behavioral tracking, and Datadog browser monitoring
 - Configured static IP via NetworkManager (nmcli)
+- Installed Unbound as local recursive DNS resolver
+- Pi-hole now queries root DNS servers directly via Unbound
+- Bypasses ISP and Google DNS completely for full privacy
+- DNS queries cached locally — 0ms response time after first lookup
+- DNSSEC validation enabled via Unbound
 
 ### WireGuard VPN Configuration
 - Generated public/private keypairs for server and clients using Curve25519
@@ -110,7 +117,7 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, an
 - Actively monitoring SSH login attempts across all Pis
 
 ### Skills Practiced
-`DNS Administration` · `Network-wide Filtering` · `VPN Configuration` · `Public Key Cryptography` · `Firewall Rules (UFW/iptables)` · `IP Forwarding` · `Port Forwarding` · `Intrusion Prevention`
+`DNS Administration` · `Network-wide Filtering` · `VPN Configuration` · `Public Key Cryptography` · `Firewall Rules (UFW/iptables)` · `IP Forwarding` · `Port Forwarding` · `Intrusion Prevention` `Recursive DNS` · `DNSSEC` · `DNS Privacy` · `Unbound`
 
 ### What I Learned
 - How DNS sinkholing works at a network level
@@ -121,6 +128,18 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, an
 - Difference between IDS (detection) and IPS (prevention) — Fail2ban is active prevention
 - Pi-hole cannot block YouTube ads because Google serves ads from the same domains as video content
 - Smart devices (Alexa, Roku) constantly send telemetry — Pi-hole can block surveillance while maintaining functionality
+- Installed Unbound as a recursive DNS resolver
+- Pi-hole now queries root DNS servers directly
+  bypassing ISP and Google DNS completely
+- Understood the difference between recursive and 
+  iterative DNS resolution
+- DNS caching reduces query time from 436ms to 0ms
+- Difference between recursive and iterative DNS resolution
+- How Unbound queries root servers directly bypassing 
+  third party DNS providers
+- DNS caching reduces query time from 436ms to 0ms
+- DNSSEC validates DNS responses haven't been tampered with
+- ISP DNS privacy risks and how to mitigate them
 
 ---
 
@@ -204,6 +223,7 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 | Pi 2: Network-wide DNS via Plume configured | ✅ | May 2026 |
 | Pi 2: 17 devices protected by Pi-hole | ✅ | May 2026 |
 | Pi 2: Fail2ban installed and configured | ✅ | May 2026 |
+| Pi 2: Unbound recursive DNS installed | ✅ | May 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
