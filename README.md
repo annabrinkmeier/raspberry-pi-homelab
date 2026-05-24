@@ -29,9 +29,7 @@ This project documents my hands-on home lab built with four Raspberry Pi single-
 Real skills come from breaking things, fixing them, and understanding why they broke. This lab is my sandbox for doing exactly that.
 
 ---
-
-## Lab Architecture
-
+```
 Home Network (192.168.x.x/24)
 │
 ├── Router / Gateway
@@ -50,7 +48,8 @@ Home Network (192.168.x.x/24)
 │   └── Nextcloud (planned)
 │
 └── Pi 4 — Security Operations (In Progress)
-└── Wazuh SIEM
+    └── Wazuh SIEM
+```
 
 ---
 
