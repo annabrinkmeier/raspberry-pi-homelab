@@ -255,6 +255,7 @@ certificates, and storage management.
 | Pi 2: iPhone added to Pi-hole | ✅ | May 2026 |
 | Pi 2: IP forwarding made permanent | ✅ | May 2026 |
 | Pi 2: WireGuard on-demand cellular configured | ✅ | May 2026 |
+| Pi 2: Blocklists updated to 543k domains | ✅ | May 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
