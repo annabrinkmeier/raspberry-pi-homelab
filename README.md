@@ -210,11 +210,12 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 | Pi 3: Media SSD mounted (3.6TB) | ✅ | April 2026 |
 | Pi 3: Jellyfin accessible on Apple TV | ✅ | April 2026 |
 | Pi 3: SSD auto-mount configured | ✅ | April 2026 |
+| Pi 3: UFW firewall configured | ✅ | May 2026 |
 | Pi 3: Nextcloud running with HTTPS | ⬜ | |
 | Pi 3: Automatic backups configured | ⬜ | |
 | Pi 4: Wazuh SIEM deployed | ⬜ | |
 | Pi 4: Wazuh agents on all Pis | ⬜ | |
-| All: Fail2ban on all Pis | ✅ | |
+| All: Fail2ban on all Pis | ✅ | May 2026|
 | Documentation complete | 🔄 | |
 
 ✅ Complete · 🔄 In Progress · ⬜ Not Started
