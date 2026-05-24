@@ -3,7 +3,7 @@
 > A self-built home lab using three Raspberry Pi devices to develop practical IT infrastructure, networking, and cybersecurity skills.
 
 ![Homelab Banner](https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge)
-![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-3%20Devices-C51A4A?style=for-the-badge&logo=raspberry-pi)
+![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4%20Devices-C51A4A?style=for-the-badge&logo=raspberry-pi)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 ---
@@ -14,220 +14,162 @@
 - [Lab Architecture](#lab-architecture)
 - [Pi 1 — RetroPie Gaming Server](#pi-1--retropie-gaming-server)
 - [Pi 2 — Pi-hole + WireGuard VPN](#pi-2--pi-hole--wireguard-vpn)
-- [Pi 3 — Jellyfin + Nextcloud](#pi-3--jellyfin--nextcloud)
-- [Skills Demonstrated](#skills-demonstrated)
-- [Security Practices](#security-practices)
-- [What I Learned](#what-i-learned)
+- [Pi 3 — Pi Movie Vault](#pi-3--pi-movie-vault)
+- [Pi 4 — Security Operations](#pi-4--security-operations)
 - [Progress Tracker](#progress-tracker)
-- [Setup Guides](#setup-guides)
 - [Future Plans](#future-plans)
 
 ---
 
 ## Overview
 
-This project documents my hands-on home lab built with three Raspberry Pi single-board computers. Each Pi is configured to serve a distinct purpose, collectively covering a wide range of IT and cybersecurity disciplines. From network administration and DNS management to VPN configuration, containerization, and self-hosted cloud services.
+This project documents my hands-on home lab built with four Raspberry Pi single-board computers. Each Pi is configured to serve a distinct purpose, collectively covering a wide range of IT and cybersecurity disciplines including network administration, DNS management, VPN configuration, containerization, intrusion prevention, and SIEM deployment.
 
-**Why I built this:** Real skills come from breaking things, fixing them, and understanding why they broke. This lab is my sandbox for doing exactly that.
+**Why I built this:** 
+Real skills come from breaking things, fixing them, and understanding why they broke. This lab is my sandbox for doing exactly that.
 
 ---
 
 ## Lab Architecture
 
-```
-Home Network (192.168.1.0/24)
+Home Network (192.168.x.x/24)
 │
-├── Router / Gateway (192.168.1.1)
-│   └── DHCP → Assigns static leases to each Pi
+├── Router / Gateway
+│   └── DHCP → Pi-hole set as network-wide DNS
 │
-├── Pi 1 — RetroPie        [192.168.1.101]
+├── Pi 1 — RetroPie Gaming
 │   └── Services: EmulationStation, RetroArch
 │
-├── Pi 2 — DNS / VPN       [192.168.1.102]
+├── Pi 2 — DNS / VPN / Security
 │   ├── Pi-hole (DNS sinkhole, port 53)
-│   └── WireGuard VPN (UDP 51820)
+│   ├── WireGuard VPN (UDP 51820)
+│   └── Fail2ban (SSH intrusion prevention)
 │
-└── Pi 3 — Media / Cloud   [192.168.1.103]
-    ├── Jellyfin (port 8096)
-    └── Nextcloud (port 443 / Docker)
-```
-
-**All Pis run Raspberry Pi OS (64-bit, Lite or Full depending on use case)**
+├── Pi 3 — Media Server
+│   ├── Jellyfin (port 8096)
+│   └── Nextcloud (planned)
+│
+└── Pi 4 — Security Operations (In Progress)
+└── Wazuh SIEM
 
 ---
 
 ## Pi 1 — RetroPie Gaming Server
 
 ### Purpose
-Configure a dedicated retro gaming console using RetroPie — a beginner-friendly Linux project that establishes fundamentals of OS installation, SSH access, file transfer, and system configuration.
+Configure a dedicated retro gaming console using RetroPie — establishing fundamentals of OS installation, SSH access, and system configuration.
 
-### Key Configurations
+### What I Did
 - Installed RetroPie image via Raspberry Pi Imager
-- Enabled SSH and configured Wi-Fi headlessly via `wpa_supplicant.conf`
-- Transferred ROM files via SCP / SFTP (FileZilla)
-- Configured controller mappings and display resolution via `raspi-config`
-- Set up static IP via DHCP reservation on router
+- Enabled SSH and configured WiFi headlessly
+- Changed default credentials immediately
+- Enabled key-based SSH authentication, disabled password login
+- Configured UFW firewall rules
+- Reflashed when package conflicts made the system unrecoverable
 
 ### Skills Practiced
-`Linux CLI` · `SSH` · `SCP/SFTP` · `Headless Setup` · `File Permissions` · `Network Configuration`
+`Linux CLI` · `SSH` · `Headless Setup` · `UFW Firewall` · `SSH Hardening`
 
-### Cybersecurity Concepts Learned
-- Changed default `pi` password and disabled default user
-- Enabled key-based SSH authentication, disabled password login
-- Understood attack surface reduction (disabled unused services)
-- How to flash an OS image using Raspberry Pi Imager
-- How to SSH into a Linux device from a Mac
-- How to generate SSH keypairs and use key-based authentication
-- How to disable password authentication for SSH hardening
-- How to configure UFW firewall rules
+### What I Learned
+- How to flash and configure an OS image headlessly
+- How to generate SSH keypairs and implement key-based authentication
 - How Debian package repositories work and how to fix broken ones
-- Troubleshooting is a core IT skill — sometimes a fresh install 
-  is the right decision
-- Learned about DNS single points of failure firsthand
-— configured a fallback DNS server (1.1.1.1) to prevent 
-internet outages if Pi-hole becomes unavailable.
+- How to configure UFW firewall rules
+- Sometimes a clean reinstall is the right call — knowing when to cut losses is a real sysadmin skill
 
-**Known Issue:** 
-RetroPie 4.8 is built on Debian Buster which has 
-package conflicts preventing full system upgrades. Unattended-upgrades 
-could not be installed due to held packages (libgcc-8-dev conflict). 
-Manual updates via `sudo apt update && sudo apt upgrade` work for 
-individual packages. A future improvement would be migrating to a 
-Bookworm-based image when RetroPie releases one.
+**Known Issue:**
+RetroPie 4.8 is built on Debian Buster which has package conflicts preventing full system upgrades. Unattended-upgrades could not be installed due to held packages (libgcc-8-dev conflict). Manual updates via `sudo apt update && sudo apt upgrade` work for individual packages.
+
 ---
 
 ## Pi 2 — Pi-hole + WireGuard VPN
 
 ### Purpose
-Transform a Raspberry Pi into a network-wide ad blocker and personal VPN server — covering DNS, networking, firewall rules, and encrypted tunneling.
+Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, and intrusion prevention system.
 
 ### Pi-hole Configuration
-- Installed Pi-hole via official installer
-- Set as primary DNS server on router (network-wide blocking)
-- Added community blocklists (StevenBlack, OISD)
-- Configured custom DNS records for local hostnames
-- Reviewed query logs to understand DNS traffic patterns
+- Installed Pi-hole v6 via official installer
+- Set as network-wide DNS via router (Plume) — all 17 devices protected automatically
+- Blocking **543,587 domains** (StevenBlack + HaGeZi Pro blocklists)
+- Currently blocking **~25% of all network traffic**
+- Whitelisted Apple iCloud Private Relay to maintain iPhone functionality
+- Identified and blocked Roku TV surveillance (Alphonso.tv), Amazon Alexa telemetry, Sift Science behavioral tracking, and Datadog browser monitoring
+- Configured static IP via NetworkManager (nmcli)
 
 ### WireGuard VPN Configuration
-- Generated public/private keypairs for server and clients
-- Configured `wg0.conf` interface and peer definitions
-- Set up IP forwarding (`net.ipv4.ip_forward=1`)
-- Configured UFW firewall rules to allow VPN traffic
-- Enabled split tunneling vs. full tunnel configurations
+- Generated public/private keypairs for server and clients using Curve25519
+- Configured `wg0.conf` interface and peer definitions from scratch
+- Set up IP forwarding (`net.ipv4.ip_forward=1`) — made permanent via `/etc/sysctl.d/`
+- Configured UFW and iptables firewall rules
 - Set up port forwarding on router (UDP 51820)
-- Connected iOS and Android clients via QR code config
+- Connected iOS client via QR code
+- Configured on-demand activation — auto-connects on cellular, auto-disconnects on home WiFi
+
+### Fail2ban Configuration
+- Installed and configured Fail2ban for SSH intrusion prevention
+- Ban policy: 5 failed attempts within 10 minutes = 1 hour ban
+- Actively monitoring SSH login attempts across all Pis
 
 ### Skills Practiced
-`DNS Administration` · `Network-wide Filtering` · `VPN Configuration` · `Public Key Cryptography` · `Firewall Rules (UFW/iptables)` · `IP Forwarding` · `Port Forwarding`
+`DNS Administration` · `Network-wide Filtering` · `VPN Configuration` · `Public Key Cryptography` · `Firewall Rules (UFW/iptables)` · `IP Forwarding` · `Port Forwarding` · `Intrusion Prevention`
 
-### Cybersecurity Concepts Learned
-- How DNS-based ad/malware blocking works (DNS sinkholing)
-- Asymmetric key cryptography in WireGuard (Curve25519)
-- Principle of least privilege in firewall rules
-- Traffic analysis via Pi-hole query logs
-- VPN tunneling and encrypted data in transit
-### What I Learned on Pi 2
-- Configured a static IP using NetworkManager (nmcli) on Raspberry Pi OS
-- Learned that Pi-hole cannot block YouTube ads because Google 
-  serves ads from the same domains as video content
-- Added multiple client devices to Pi-hole DNS manually
-- Understood the difference between dynamic and static IP addresses
-  and why static IPs matter for server infrastructure
-- Discovered IP forwarding (net.ipv4.ip_forward) resets to 0 
-  on reboot unless saved to /etc/sysctl.d/ — this was causing 
-  WireGuard routing to break after every reboot
-- Configured WireGuard on-demand activation — automatically 
-  connects on cellular and disconnects on home WiFi
-- Installed and configured Fail2ban to protect SSH
-- Configured ban rules: 5 failed attempts = 1 hour ban
-- Understood the difference between IDS and IPS
-- Fail2ban is an Intrusion Prevention System (IPS) — 
-  it actively blocks attackers, not just detects them
+### What I Learned
+- How DNS sinkholing works at a network level
+- DNS single points of failure — configured 1.1.1.1 as fallback DNS
+- Pi-hole v6 completely changed the web interface — had to troubleshoot using curl and systemctl
+- IP forwarding resets to 0 on reboot unless saved to `/etc/sysctl.d/`
+- A single character typo (`erth0` instead of `eth0`) broke VPN routing for months — fixed by carefully auditing config files character by character
+- Difference between IDS (detection) and IPS (prevention) — Fail2ban is active prevention
+- Pi-hole cannot block YouTube ads because Google serves ads from the same domains as video content
+- Smart devices (Alexa, Roku) constantly send telemetry — Pi-hole can block surveillance while maintaining functionality
 
-**Pi-hole & DNS:**
-- How DNS works at a network level and how it can be used 
-  for security (blocking malicious domains before they load)
-- Configured a DNS sinkhole blocking 77,526 ad and malware domains
-- Learned about DNS single points of failure — added 1.1.1.1 
-  as a fallback DNS to prevent internet outages
-- Discovered Pi-hole v6 changed the web interface significantly
-  — had to troubleshoot using curl and systemctl to diagnose
-
-**WireGuard VPN:**
-- How VPN tunneling works at a cryptographic level using 
-  Curve25519 asymmetric key pairs
-- Generated server and client keypairs manually
-- Configured wg0.conf interface and peer definitions from scratch
-- Understood the difference between local and external VPN testing
-- Learned that port forwarding is required for external VPN access
-
-**Security & Networking:**
-- Configured UFW firewall rules for SSH, WireGuard, and web ports
-- Enabled IP forwarding for VPN traffic routing
-- Learned how self-signed SSL certificates work and why browsers 
-  block them
-- Troubleshot network connectivity using ping, curl, ss, and systemctl
-- Understood NAT (Network Address Translation) and port forwarding
-
-**Real World Lesson:**
-- Troubleshooting is 90% of IT work — this Pi required diagnosing 
-  multiple issues including missing packages, firewall blocks, 
-  and a major version change in Pi-hole
-
-- Diagnosed a months-long VPN routing failure caused by a single 
-  character typo — "erth0" instead of "eth0" in wg0.conf. 
-  This broke iptables NAT masquerading and prevented traffic from 
-  routing out to the internet. Fixed by carefully auditing the 
-  config file character by character.
- 
 ---
-## Pi 3 — Pi Movie Vault (Jellyfin + Nextcloud)
+
+## Pi 3 — Pi Movie Vault
+
 ### Purpose
-Host a personal media server and self-hosted cloud storage solution 
-using Docker — covering containerization, reverse proxying, SSL 
-certificates, and storage management.
+Self-hosted media server using Docker on a Raspberry Pi 5.
 
-### Current Status: Jellyfin Complete ✅ | Nextcloud Planned 🔄
+### Current Status: Jellyfin Complete ✅ | Nextcloud Planned ⬜
 
-### What I've Done So Far
-- Flashed Raspberry Pi OS Lite (64-bit) using Raspberry Pi Imager
-- Pre-configured hostname (pimovievault), username, SSH keys, 
-  and WiFi credentials during flash using Imager customisation settings
-- Attempted remote setup from hotel during work trip
-- Discovered hotel WiFi uses **client isolation** — a security feature 
-  that prevents devices on the same network from communicating.
-  Confirmed by running a full network sweep (arp -a and ping sweep)
-  with no Pi hostname appearing in results.
-- SD card is flashed and ready for home network deployment
-
-### Completed Setup
+### Completed
 **Jellyfin Media Server** ✅
 - Installed via Docker on Raspberry Pi OS Lite (64-bit)
 - Connected 3.6TB external SSD for media storage
 - Configured auto-mount via fstab (exFAT format)
-- Media library includes The Sopranos and Yellowstone
-- Accessible on local network at `http://192.168.40.26:8096`
-- Streaming live to Apple TV via Swiftfin app
-- Currently ripping ISO files to MKV format using MakeMKV
-  and renaming with FileBot for proper episode organization
+- Accessible on local network via port 8096
+- Streaming to Apple TV via Swiftfin app
+- Currently converting ISO disc images to MKV using MakeMKV and FileBot for proper episode organization
+- Connected via ethernet for stable streaming
 
-### Planned Setup
+### Planned
 **Nextcloud (Self-hosted Cloud)**
 - Deploy via Docker Compose with MariaDB backend
 - Configure HTTPS using self-signed certificate
 - Set up Nginx reverse proxy
-- Configure file storage and user accounts
 - Enable automatic backups via cron job
 
-**Nextcloud (Self-hosted Cloud)**
-- Deploy via Docker Compose with MariaDB backend
-- Configure HTTPS using self-signed certificate
-- Set up Nginx reverse proxy for clean domain routing
-- Configure file storage and user accounts
-- Enable automatic backups via cron job
+### What I Learned
+- Docker installation and container management
+- Volume mounts and persistent storage in Docker
+- exFAT filesystem mounting and fstab configuration
+- Hotel WiFi uses client isolation — devices on the same network can't communicate (discovered during remote setup attempt)
+- Ethernet vs WiFi for media streaming reliability
 
-### Planned Skills to Practice
-`Docker & Docker Compose` · `Reverse Proxy (Nginx)` · `SSL/TLS Certificates` · `Database Administration (MariaDB)` · `Cron Jobs` · `Self-hosting` · `Storage Management`
+---
+
+## Pi 4 — Security Operations Center (In Progress)
+
+### Purpose
+Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs from all other Pis — building a real Security Operations Center.
+
+### Current Status: ⬜ Not Started
+
+### Planned Setup
+- Deploy Wazuh SIEM server
+- Install Wazuh agents on Pi 1, 2, and 3
+- Configure log collection and alerting
+- Build security dashboards
 
 ---
 
@@ -246,15 +188,13 @@ certificates, and storage management.
 | Pi 1: System updates run | ⬜ | |
 | Pi 2: OS installed & SSH configured | ✅ | March 2026 |
 | Pi 2: Pi-hole installed & network DNS set | ✅ | March 2026 |
-| Pi 2: Blocklists configured (77,526 domains) | ✅ | March 2026 |
-| Pi 2: Set as DNS on Mac and iPhone | ✅ | March 2026 |
+| Pi 2: Blocklists configured | ✅ | March 2026 |
 | Pi 2: UFW firewall configured | ✅ | March 2026 |
 | Pi 2: Web dashboard accessible | ✅ | March 2026 |
 | Pi 2: WireGuard server configured | ✅ | March 2026 |
 | Pi 2: WireGuard client configured | ✅ | March 2026 |
-| Pi 2: Port forwarding configured (i3 call) | ✅ | April 2026 |
+| Pi 2: Port forwarding configured | ✅ | April 2026 |
 | Pi 2: Mobile VPN client connected | ✅ | April 2026 |
-| Pi 2: VPN routing fixed (eth0 typo) | ✅ | May 2026 |
 | Pi 2: VPN routing fixed (eth0 typo) | ✅ | May 2026 |
 | Pi 2: Pi-hole static IP configured | ✅ | May 2026 |
 | Pi 2: Roku TV added to Pi-hole | ✅ | May 2026 |
@@ -273,34 +213,25 @@ certificates, and storage management.
 | Pi 3: SSD auto-mount configured | ✅ | April 2026 |
 | Pi 3: Nextcloud running with HTTPS | ⬜ | |
 | Pi 3: Automatic backups configured | ⬜ | |
-| All: fail2ban installed | ⬜ | |
+| Pi 4: Wazuh SIEM deployed | ⬜ | |
+| Pi 4: Wazuh agents on all Pis | ⬜ | |
+| All: Fail2ban on all Pis | 🔄 | |
 | Documentation complete | 🔄 | |
 
 ✅ Complete · 🔄 In Progress · ⬜ Not Started
 
 ---
 
-## Setup Guides
-
-Detailed step-by-step guides for each Pi are available in the `/docs` folder:
-
-- [`docs/pi1-retropie-setup.md`](docs/pi1-retropie-setup.md)
-- [`docs/pi2-pihole-setup.md`](docs/pi2-pihole-setup.md)
-- [`docs/pi2-wireguard-setup.md`](docs/pi2-wireguard-setup.md)
-- [`docs/pi3-jellyfin-docker-setup.md`](docs/pi3-jellyfin-docker-setup.md)
-- [`docs/pi3-nextcloud-docker-setup.md`](docs/pi3-nextcloud-docker-setup.md)
-- [`docs/security-hardening-checklist.md`](docs/security-hardening-checklist.md)
-
----
-
 ## Future Plans
 
-- [ ] Set up a SIEM (Security Information & Event Management) using Wazuh or Graylog
-- [ ] Add a fourth Pi as a honeypot to observe attack patterns
+- [ ] Complete Wazuh SIEM deployment on Pi 4
+- [ ] Install Fail2ban on Pi 3 and Pi 4
+- [ ] Deploy Nextcloud on Pi 3
+- [ ] Set up Grafana + Prometheus monitoring dashboards
+- [ ] Add honeypot to observe real attack patterns
 - [ ] Configure centralized logging across all Pis
-- [ ] Set up Grafana + Prometheus for system monitoring dashboards
-- [ ] Experiment with Kubernetes (k3s) for container orchestration
-- [ ] Add a DMZ network segment for internet-exposed services
+- [ ] Experiment with Kubernetes (k3s)
+- [ ] Add DMZ network segment
 
 ---
 
