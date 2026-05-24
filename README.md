@@ -138,6 +138,11 @@ Transform a Raspberry Pi into a network-wide ad blocker and personal VPN server 
   WireGuard routing to break after every reboot
 - Configured WireGuard on-demand activation — automatically 
   connects on cellular and disconnects on home WiFi
+- Installed and configured Fail2ban to protect SSH
+- Configured ban rules: 5 failed attempts = 1 hour ban
+- Understood the difference between IDS and IPS
+- Fail2ban is an Intrusion Prevention System (IPS) — 
+  it actively blocks attackers, not just detects them
 
 **Pi-hole & DNS:**
 - How DNS works at a network level and how it can be used 
@@ -174,6 +179,7 @@ Transform a Raspberry Pi into a network-wide ad blocker and personal VPN server 
   This broke iptables NAT masquerading and prevented traffic from 
   routing out to the internet. Fixed by carefully auditing the 
   config file character by character.
+ 
 ---
 ## Pi 3 — Pi Movie Vault (Jellyfin + Nextcloud)
 ### Purpose
@@ -258,6 +264,7 @@ certificates, and storage management.
 | Pi 2: Blocklists updated to 543k domains | ✅ | May 2026 |
 | Pi 2: Network-wide DNS via Plume configured | ✅ | May 2026 |
 | Pi 2: 17 devices protected by Pi-hole | ✅ | May 2026 |
+| Pi 2: Fail2ban installed and configured | ✅ | May 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
