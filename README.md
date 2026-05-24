@@ -127,6 +127,12 @@ Transform a Raspberry Pi into a network-wide ad blocker and personal VPN server 
 - Traffic analysis via Pi-hole query logs
 - VPN tunneling and encrypted data in transit
 ### What I Learned on Pi 2
+- Configured a static IP using NetworkManager (nmcli) on Raspberry Pi OS
+- Learned that Pi-hole cannot block YouTube ads because Google 
+  serves ads from the same domains as video content
+- Added multiple client devices to Pi-hole DNS manually
+- Understood the difference between dynamic and static IP addresses
+  and why static IPs matter for server infrastructure
 
 **Pi-hole & DNS:**
 - How DNS works at a network level and how it can be used 
@@ -238,6 +244,10 @@ certificates, and storage management.
 | Pi 2: Port forwarding configured (i3 call) | ✅ | April 2026 |
 | Pi 2: Mobile VPN client connected | ✅ | April 2026 |
 | Pi 2: VPN routing fixed (eth0 typo) | ✅ | May 2026 |
+| Pi 2: VPN routing fixed (eth0 typo) | ✅ | May 2026 |
+| Pi 2: Pi-hole static IP configured | ✅ | May 2026 |
+| Pi 2: Roku TV added to Pi-hole | ✅ | May 2026 |
+| Pi 2: iPhone added to Pi-hole | ✅ | May 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
