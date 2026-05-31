@@ -189,6 +189,14 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 - Configure log collection and alerting
 - Build security dashboards
 
+### What I Learned
+- Deployed Wazuh SIEM manually on ARM architecture
+- Learned that Wazuh official installer only supports x86_64
+- Manually generated SSL certificates for Wazuh components
+- Connected agents across multiple Pis using port 1514/1515
+- Ran CIS Debian 13 benchmark — 74 passed, 108 failed
+- Understood that a score of 25/100 is normal for a fresh install
+
 ---
 
 ## Progress Tracker
@@ -233,9 +241,17 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 | Pi 3: UFW firewall configured | ✅ | May 2026 |
 | Pi 3: Nextcloud running with HTTPS | ⬜ | |
 | Pi 3: Automatic backups configured | ⬜ | |
-| Pi 4: Wazuh SIEM deployed | ⬜ | |
-| Pi 4: Wazuh agents on all Pis | ⬜ | |
+| Pi 4: Wazuh SIEM deployed | ✅ | May 2026 |
+| Pi 4: Wazuh Indexer configured | ✅ | May 2026 |
+| Pi 4: Wazuh Dashboard accessible | ✅ | May 2026 |
+| Pi 4: UFW firewall configured | ✅ | May 2026 |
+| Pi 4: Wazuh agent on Pi-hole | ✅ | May 2026 |
+| Pi 4: Wazuh agent on Jellyfin | ✅ | May 2026 |
+| Pi 4: Wazuh agent on RetroPie | ✅ | May 2026 |
+| Pi 4: CIS Benchmark audit running | ✅ | May 2026 |
+| Pi 4: Fail2ban installed and configured | ✅ | May 2026 |
 | All: Fail2ban on all Pis | ✅ | May 2026|
+| All: Fail2ban on all Pis | ✅ | May 2026 |
 | Documentation complete | 🔄 | |
 
 ✅ Complete · 🔄 In Progress · ⬜ Not Started
