@@ -212,6 +212,13 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 | Pi 1: Reflashed with fresh RetroPie image | ✅ | March 2026 |
 | Pi 1: UFW firewall configured | ✅ | March 2026 |
 | Pi 1: System updates run | ⬜ | |
+| Pi 1: Converted to Nextcloud | ✅ | July 2026 |
+| Pi 1: Docker installed | ✅ | July 2026 |
+| Pi 1: Nextcloud running | ✅ | July 2026 |
+| Pi 1: UFW firewall configured | ✅ | July 2026 |
+| Pi 1: Fail2ban installed | ✅ | July 2026 |
+| Pi 1: Wazuh agent connected | ✅ | July 2026 |
+| Pi 1: iPhone auto upload configured | ✅ | July 2026 |
 | Pi 2: OS installed & SSH configured | ✅ | March 2026 |
 | Pi 2: Pi-hole installed & network DNS set | ✅ | March 2026 |
 | Pi 2: Blocklists configured | ✅ | March 2026 |
