@@ -195,6 +195,8 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 | All: UFW firewall on all Pis | ✅ | May 2026 |
 | All: Wazuh monitoring on all Pis | ✅ | August 2026 |
 | Documentation complete | 🔄 | |
+| All: Homelab running unattended for 7 weeks | ✅ | September 2026 |
+| Pi 4: Wazuh password reset and secured | ✅ | September 2026 |
 
 ✅ Complete · 🔄 In Progress · ⬜ Not Started
 
