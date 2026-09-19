@@ -38,12 +38,13 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, in
 
 ### Pi-hole Configuration
 - Installed Pi-hole v6 via official installer
-- Set as network-wide DNS via router (Plume) — 20+ devices protected automatically
-- Blocking **543,587 domains** (StevenBlack + HaGeZi Pro blocklists)
-- Currently blocking **~25% of all network traffic**
+- Set as network-wide DNS via router (Plume) — **28 active clients** protected automatically
+- Blocking **607,158 domains** (StevenBlack + HaGeZi Pro blocklists) — auto-updates while running unattended
+- Currently blocking **~26.7% of all network traffic**
 - Whitelisted Apple iCloud Private Relay to maintain iPhone functionality
 - Identified and blocked Roku TV surveillance (Alphonso.tv), Amazon Alexa telemetry, Sift Science behavioral tracking, and Datadog browser monitoring
 - Configured static IP via NetworkManager (nmcli)
+- Pi-hole has maintained 7+ weeks of unattended uptime with automatic blocklist updates
 
 ### Unbound Recursive DNS
 - Installed Unbound as local recursive DNS resolver
