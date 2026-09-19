@@ -50,6 +50,12 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, in
 - Hardened kernel parameters (SYN cookies, ICMP redirects, source routing)
 - Fixed file permissions on /etc/passwd, /etc/shadow, /etc/group
 - CIS benchmark score improved from 25% to 40%
+- Installed AIDE file integrity monitoring — detects unauthorized file changes
+- Configured daily AIDE filesystem checks via systemd timer
+- Hardened password quality requirements (14 char min, complexity rules)
+- Configured login attempt lockout (5 attempts = 10 min lockout)
+- Set noexec on /dev/shm to prevent malicious code execution
+
 
 ### Unbound Recursive DNS
 - Installed Unbound as local recursive DNS resolver
@@ -183,6 +189,9 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 | Pi 2: CIS benchmark score improved 25% → 40% | ✅ | September 2026 |
 | Pi 2: Kernel hardening parameters configured | ✅ | September 2026 |
 | Pi 2: File permissions hardened | ✅ | September 2026 |
+| Pi 2: AIDE file integrity monitoring installed | ✅ | September 2026 |
+| Pi 2: Password complexity requirements configured | ✅ | September 2026 |
+| Pi 2: Login lockout policy configured | ✅ | September 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
