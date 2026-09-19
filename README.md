@@ -192,6 +192,10 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 | Pi 2: AIDE file integrity monitoring installed | ✅ | September 2026 |
 | Pi 2: Password complexity requirements configured | ✅ | September 2026 |
 | Pi 2: Login lockout policy configured | ✅ | September 2026 |
+| Pi 2: SSH hardening configured | ✅ | September 2026 |
+| Pi 2: Cron permissions hardened | ✅ | September 2026 |
+| Pi 2: Auditd logging installed | ✅ | September 2026 |
+| Pi 2: Audit rules configured | ✅ | September 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
