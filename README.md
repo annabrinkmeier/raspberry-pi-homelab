@@ -45,6 +45,11 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, in
 - Identified and blocked Roku TV surveillance (Alphonso.tv), Amazon Alexa telemetry, Sift Science behavioral tracking, and Datadog browser monitoring
 - Configured static IP via NetworkManager (nmcli)
 - Pi-hole has maintained 7+ weeks of unattended uptime with automatic blocklist updates
+- Fixed CIS benchmark failures:
+- Set noexec on /dev/shm to prevent executable code in shared memory
+- Hardened kernel parameters (SYN cookies, ICMP redirects, source routing)
+- Fixed file permissions on /etc/passwd, /etc/shadow, /etc/group
+- CIS benchmark score improved from 25% to 40%
 
 ### Unbound Recursive DNS
 - Installed Unbound as local recursive DNS resolver
@@ -175,6 +180,9 @@ Dedicated Wazuh SIEM server to collect, correlate, and analyze security logs fro
 | Pi 2: WireGuard on-demand cellular configured | ✅ | May 2026 |
 | Pi 2: Fail2ban installed and configured | ✅ | May 2026 |
 | Pi 2: Unbound recursive DNS installed | ✅ | May 2026 |
+| Pi 2: CIS benchmark score improved 25% → 40% | ✅ | September 2026 |
+| Pi 2: Kernel hardening parameters configured | ✅ | September 2026 |
+| Pi 2: File permissions hardened | ✅ | September 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
 | Pi 3: Docker installed | ✅ | April 2026 |
 | Pi 3: Jellyfin installed via Docker | ✅ | April 2026 |
