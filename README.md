@@ -92,6 +92,20 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, in
 - Difference between recursive and iterative DNS resolution
 - DNSSEC validates DNS responses haven't been tampered with
 - ISP DNS privacy risks and how to mitigate them
+### Security Hardening Session (September 2026)
+- Fixed 19 additional CIS benchmark checks in one session
+- CIS score progression: 25% → 40% → 49% (nearly doubled from start)
+- Installed and configured AIDE file integrity monitoring
+- Set up auditd with custom rules monitoring critical system files
+- Configured password complexity requirements (14 char minimum)
+- Implemented login lockout policy
+- Hardened SSH configuration (MaxAuthTries, X11, TCPForwarding)
+- Applied kernel security parameters (ASLR, core dumps, SYN cookies)
+- Configured NTP time synchronization with chrony
+- Added legal warning banner to SSH login
+- Fixed cron and at command permissions
+- Set noexec on /dev/shm
+- Disabled USB storage module
 
 ---
 
