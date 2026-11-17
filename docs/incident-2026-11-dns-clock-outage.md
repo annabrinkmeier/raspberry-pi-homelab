@@ -3,7 +3,7 @@
 **Date found:** November 15, 2026
 **System:** Pi 2 (Pi-hole + Unbound + WireGuard)
 **Impact:** Every DNS lookup sent to the Pi-hole failed
-**Status:** Fixed. One follow-up test (a planned reboot) is still open.
+**Status:** Fixed, and verified across two reboots on November 17, 2026.
 
 ## Summary
 
@@ -46,7 +46,7 @@ A backup of the original chrony configuration was saved before the change.
 
 ## Follow-ups
 
-- [ ] Planned reboot to confirm the fix holds across a restart
+- [x] Planned reboot to confirm the fix holds across a restart (done November 17: two reboots, clock synchronized within seconds each time)
 - [ ] Add a real-time clock battery to the Pi 5 so the clock survives power loss
 - [ ] Add a monitoring alert for clock drift
 
