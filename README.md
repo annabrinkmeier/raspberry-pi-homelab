@@ -66,7 +66,7 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, in
 ### Pi-hole Configuration
 - Installed Pi-hole v6 via official installer
 - Set as network-wide DNS via router (Plume), so every device on the network is covered automatically
-- Blocklists: StevenBlack + HaGeZi Pro (about 607,000 domains as of September 2026), updated automatically
+- Blocklists: StevenBlack + HaGeZi Pro, updated automatically. In November 2026 HaGeZi retired the hosts-format file I used; I switched to HaGeZi's adblock-format Pro list, where one entry blocks a domain and all its subdomains (about 318,000 entries in total)
 - Blocks roughly 27–29% of all DNS lookups on the network
 - Whitelisted Apple iCloud Private Relay to maintain iPhone functionality
 - Identified and blocked Roku TV surveillance (Alphonso.tv), Amazon Alexa telemetry, Sift Science behavioral tracking, and Datadog browser monitoring
@@ -78,7 +78,7 @@ Transform a Raspberry Pi into a network-wide ad blocker, personal VPN server, in
 - Pi-hole sends lookups to Unbound, which queries the root DNS servers directly instead of handing my browsing history to one public resolver
 - DNS answers are cached locally, so repeat lookups return almost instantly
 - DNSSEC validation enabled and tested (a deliberately broken test domain is refused)
-- **Correction (November 2026):** an audit showed Unbound had been quietly forwarding every lookup to a public resolver through a helper service, so this setup was less private than I had claimed here. It is fixed and verified now. [Full write-up](docs/finding-2026-11-unbound-forwarding.md)
+- **Correction (November 2026):** an audit showed Unbound had been quietly forwarding every lookup to a public resolver, so this setup was less private than I had claimed here. My first fix covered only one of two causes; a reboot test exposed the second. Both are fixed now, and the fix has been verified across a reboot. [Full write-up](docs/finding-2026-11-unbound-forwarding.md)
 
 ### WireGuard VPN Configuration
 - Generated public/private keypairs for server and clients using Curve25519
@@ -116,10 +116,11 @@ I audited this Pi against what this README claimed. Four things did not match, a
 |---------|------|-----|
 | System clock was 55 days behind after a reboot, which made every DNS lookup fail | Network-wide DNS outage | Set the clock, gave chrony time servers by IP address so time sync no longer depends on DNS. [Write-up](docs/incident-2026-11-dns-clock-outage.md) |
 | UFW firewall package was no longer installed | No host firewall on the DNS/VPN server | Reinstalled UFW with default-deny incoming and only the needed ports (SSH, DNS, web dashboard, WireGuard). Enabled it with an automatic rollback timer so a mistake could not lock me out |
-| Unbound was forwarding lookups to a public resolver | Privacy claim in this README was wrong | Disabled the helper service, removed the forwarders, verified direct recursion and DNSSEC. [Write-up](docs/finding-2026-11-unbound-forwarding.md) |
+| Unbound was forwarding lookups to a public resolver | Privacy claim in this README was wrong | Turned off both mechanisms that added the forwarders (a systemd helper and a resolvconf hook), verified direct recursion and DNSSEC, and confirmed the fix survives a reboot. [Write-up](docs/finding-2026-11-unbound-forwarding.md) |
+| HaGeZi Pro blocklist URL started returning 404 | Blocking quietly fell back to one list during a routine update | Switched to HaGeZi's current adblock-format Pro list and rebuilt the blocklist |
 | SSH X11 and TCP forwarding were still enabled | Unneeded SSH features left on | Added a drop-in config file disabling both, verified with `sshd -T` |
 
-I also removed a leftover lighttpd web server that Pi-hole v6 no longer needs.
+I also removed a leftover lighttpd web server that Pi-hole v6 no longer needs, and installed 155 system updates plus the latest Pi-hole release (backups first, then a reboot and a full re-check).
 
 ### Skills Practiced
 `DNS Administration` · `Network-wide Filtering` · `VPN Configuration` · `Public Key Cryptography` · `Firewall Rules (UFW/iptables)` · `IP Forwarding` · `Port Forwarding` · `Intrusion Prevention` · `Recursive DNS` · `DNSSEC` · `DNS Privacy` · `Unbound` · `Security Auditing` · `Incident Response` · `Time Synchronization (NTP)`
@@ -269,7 +270,8 @@ The firewall and Fail2ban claims above checked out. Findings and fixes:
 | Pi 2: Security audit against this README | ✅ | November 2026 |
 | Pi 2: DNS outage diagnosed and fixed (clock / DNSSEC) | ✅ | November 2026 |
 | Pi 2: UFW firewall found missing and restored | ✅ | November 2026 |
-| Pi 2: Unbound forwarding removed, direct recursion verified | ✅ | November 2026 |
+| Pi 2: Unbound forwarding removed, direct recursion verified across a reboot | ✅ | November 2026 |
+| Pi 2: System and Pi-hole updates installed, blocklist source repaired | ✅ | November 2026 |
 | Pi 2: SSH X11 and TCP forwarding disabled | ✅ | November 2026 |
 | Pi 2: Per-device query log review, custom deny entries | ✅ | November 2026 |
 | Pi 3: OS installed & SSH configured | ✅ | April 2026 |
